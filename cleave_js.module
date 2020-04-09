@@ -31,15 +31,15 @@ function cleave_js_libraries_info() {
 
 /**
  * Implements hook_form_alter().
- *
- * Process #cleave element properties and turn them into data attributes.
- *
- * This could also be achieved by using $element['#process'] or
- * $element['#after_build'], but callbacks for these can only be added per
- * element type. This would mean implementing hook_element_info_alter() and
- * adding the callback to all / some (which?) types.
  */
 function cleave_js_form_alter(&$form, &$form_state, $form_id) {
+  $form['#after_build'][] = 'cleave_js_form_after_build';
+}
+
+/**
+ * Process #cleave element properties and turn them into data attributes.
+ */
+function cleave_js_form_after_build($form, &$form_state) {
   $found = FALSE;
   ElementTree::applyRecursively($form, function (&$element, $key, &$parent) use (&$found) {
     if (!empty($element['#cleave'])) {
@@ -52,4 +52,5 @@ function cleave_js_form_alter(&$form, &$form_state, $form_id) {
     $form['#attached']['libraries_load']['cleave.js'] = ['cleave.js'];
     $form['#attached']['js'][$path . '/cleave_js.js'] = ['type' => 'file'];
   }
+  return $form;
 }
