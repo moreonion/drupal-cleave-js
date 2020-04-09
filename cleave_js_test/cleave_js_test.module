@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations and callbacks for the cleave_js_test module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function cleave_js_test_menu() {
+  $items['tests/cleave-js'] = [
+    'title' => 'Cleave.js test form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['cleave_js_test_form'],
+    'access callback' => TRUE,
+  ];
+  return $items;
+}
+
+/**
+ * Form callback: Test form elements for cleave.js.
+ */
+function cleave_js_test_form($form, &$form_state) {
+  $form['numeral'] = [
+    '#type' => 'textfield',
+    '#title' => t('Numeral'),
+    '#cleave' => [
+      'numeral' => TRUE,
+      'numeralThousandsGroupStyle' => 'thousand',
+    ],
+  ];
+  return $form;
+}

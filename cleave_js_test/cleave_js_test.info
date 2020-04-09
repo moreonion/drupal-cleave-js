@@ -1,0 +1,7 @@
+name = Cleave.js integration test module
+description = Test module for the Cleave.js integration
+core = 7.x
+php = 7.1
+hidden = TRUE
+
+dependencies[] = cleave_js:cleave_js

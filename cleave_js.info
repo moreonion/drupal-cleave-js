@@ -1,0 +1,7 @@
+name = cleave.js integration
+description = A form-API integration for cleave.js.
+core = 7.x
+php = 7.1
+
+dependencies[] = libraries:libraries
+dependencies[] = little_helpers:little_helpers (>=2.0-alpha6)
